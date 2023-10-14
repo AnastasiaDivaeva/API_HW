@@ -1,13 +1,13 @@
 package dto;
 
-import java.util.Set;
+import java.util.List;
 
 public class PetDTO {
     private int id;
     private CategoryDTO category;
     private String name;
-    private Set<String> photoUrls;
-    private Set<TagDTO> tags;
+    private List<String> photoUrls;
+    private List<TagDTO> tags;
     private String status;
 
     public int getId() {
@@ -34,19 +34,19 @@ public class PetDTO {
         this.name = name;
     }
 
-    public Set<String> getPhotoUrls() {
+    public List<String> getPhotoUrls() {
         return photoUrls;
     }
 
-    public void setPhotoUrls(Set<String> photoUrls) {
+    public void setPhotoUrls(List<String> photoUrls) {
         this.photoUrls = photoUrls;
     }
 
-    public Set<TagDTO> getTags() {
+    public List<TagDTO> getTags() {
         return tags;
     }
 
-    public void setTags(Set<TagDTO> tags) {
+    public void setTags(List<TagDTO> tags) {
         this.tags = tags;
     }
 
@@ -57,15 +57,16 @@ public class PetDTO {
     public void setStatus(String status) {
         this.status = status;
     }
-    public static PetDTO createPet(int petId, String petName, String petStatus, Set<TagDTO> tags,
-                                   Set<String> photoUrls, CategoryDTO category) {
-        PetDTO petToCreate = new PetDTO();
-        petToCreate.setId(petId);
-        petToCreate.setCategory(category);
-        petToCreate.setName(petName);
-        petToCreate.setStatus(petStatus);
-        petToCreate.setPhotoUrls(photoUrls);
-        petToCreate.setTags(tags);
-        return petToCreate;
+
+    public PetDTO(int id, CategoryDTO category, String name, List<String> photoUrls, List<TagDTO> tags, String status) {
+        this.id = id;
+        this.category = category;
+        this.name = name;
+        this.photoUrls = photoUrls;
+        this.tags = tags;
+        this.status = status;
+    }
+
+    public PetDTO() {
     }
 }

@@ -12,62 +12,58 @@ public class StoreDTO {
         return id;
     }
 
-    public StoreDTO setId(int id) {
+    public void setId(int id) {
         this.id = id;
-        return this;
     }
 
     public int getPetId() {
         return petId;
     }
 
-    public StoreDTO setPetId(int petId) {
+    public void setPetId(int petId) {
         this.petId = petId;
-        return this;
     }
 
     public String getShipDate() {
         return shipDate;
     }
 
-    public StoreDTO setShipDate(String shipDate) {
+    public void setShipDate(String shipDate) {
         this.shipDate = shipDate;
-        return this;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public StoreDTO setStatus(String status) {
+    public void setStatus(String status) {
         this.status = status;
-        return this;
     }
 
     public boolean isComplete() {
         return complete;
     }
 
-    public StoreDTO setComplete(boolean complete) {
+    public void setComplete(boolean complete) {
         this.complete = complete;
-        return this;
     }
     public int getQuantity() {
         return quantity;
     }
 
-    public StoreDTO setQuantity(int quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
-        return this;
     }
-    public static StoreDTO createStore(int id,int petId,int quantity,String shipDate,String status,boolean complete){
-        StoreDTO storeToCreate=new StoreDTO();
-        storeToCreate.setId(id);
-        storeToCreate.setPetId(petId);
-        storeToCreate.setQuantity(quantity);
-        storeToCreate.setShipDate(shipDate);
-        storeToCreate.setStatus(status);
-        storeToCreate.setComplete(complete);
-        return storeToCreate;
+
+    public StoreDTO(int id, int petId, int quantity, String shipDate, String status, boolean complete) {
+        this.id = id;
+        this.petId = petId;
+        this.quantity = quantity;
+        this.shipDate = shipDate;
+        this.status = status;
+        this.complete = complete;
+    }
+
+    public StoreDTO() {
     }
 }

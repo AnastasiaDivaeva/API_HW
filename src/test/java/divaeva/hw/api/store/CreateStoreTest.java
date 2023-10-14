@@ -1,7 +1,6 @@
 package divaeva.hw.api.store;
 
-import divaeva.hw.api.pet.PetTestBase;
-import dto.PetDTO;
+import divaeva.hw.api.TestUrls;
 import dto.StoreDTO;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -9,8 +8,7 @@ import org.testng.annotations.Test;
 import rest.client.RestClient;
 
 public class CreateStoreTest extends StoreTestBase {
-    private RestClient<StoreDTO> restClient = new RestClient<>(BASE_SERVER_URL_STORE);
-
+    private final RestClient restClient = new RestClient(TestUrls.BASE_SERVER_URL_STORE.getUrl());
 
     @Test
     public void verifyStoreCanBeCreate() {
@@ -21,7 +19,7 @@ public class CreateStoreTest extends StoreTestBase {
         String status = "placed";
         boolean complete = true;
 
-        StoreDTO storeToCreate = StoreDTO.createStore(id, petId, quantity, shipDate, status, complete);
+        StoreDTO storeToCreate = new StoreDTO(id, petId, quantity, shipDate, status, complete);
         Response response = restClient.postEntity(storeToCreate);
         StoreDTO createStoreResponse = response.as(StoreDTO.class);
 

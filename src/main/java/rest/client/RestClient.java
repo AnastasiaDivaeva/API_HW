@@ -6,7 +6,7 @@ import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
-public class RestClient<T> {
+public class RestClient {
 
     private String url;
 
@@ -17,19 +17,19 @@ public class RestClient<T> {
     private static final String CONTENT_TYPE_HEADER_NAME = "Content-Type";
     private static final String APPLICATION_JSON_MEDIA_TYPE = "application/json";
 
-    public Response getEntity(int id) {
+    public Response getEntities(int id) {
         return given().when()
                 .filters(new RequestLoggingFilter(), new ResponseLoggingFilter())
                 .get(url + id);
     }
 
-    public Response getEntity() {
+    public Response getEntities() {
         return given().when()
                 .filters(new RequestLoggingFilter(), new ResponseLoggingFilter())
                 .get(url);
     }
 
-    public Response postEntity(T body) {
+    public Response postEntity(Object body) {
         return given()
                 .header(CONTENT_TYPE_HEADER_NAME, APPLICATION_JSON_MEDIA_TYPE)
                 .body(body)
@@ -44,7 +44,7 @@ public class RestClient<T> {
                 .delete(url + id);
     }
 
-    public Response updateEntity(T petToUpdate) {
+    public Response updateEntity(Object petToUpdate) {
         return given()
                 .header(CONTENT_TYPE_HEADER_NAME, APPLICATION_JSON_MEDIA_TYPE)
                 .body(petToUpdate)

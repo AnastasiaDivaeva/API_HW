@@ -3,8 +3,6 @@ package divaeva.hw.api.store;
 import dto.StoreDTO;
 
 public class StoreTestBase {
-    protected final String BASE_SERVER_URL_STORE = "https://petstore.swagger.io/v2/store/order/";
-    protected final String BASE_SERVER_URL_STORE_INVENTORY = "https://petstore.swagger.io/v2/store/inventory";
 
     protected StoreDTO createDefaultStore(int id) {
         int petId = 12;
@@ -13,6 +11,6 @@ public class StoreTestBase {
         String status = "placed";
         boolean complete = true;
 
-        return StoreDTO.createStore(id, petId, quantity, shipDate, status, complete);
+        return new StoreDTO(id, petId, quantity, shipDate, status, complete);
     }
 }

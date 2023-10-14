@@ -9,26 +9,23 @@ public class ErrorResponse {
         return code;
     }
 
-    public ErrorResponse setCode(int code) {
+    public void setCode(int code) {
         this.code = code;
-        return this;
     }
 
     public String getType() {
         return type;
     }
 
-    public ErrorResponse setType(String type) {
+    public void setType(String type) {
         this.type = type;
-        return this;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public ErrorResponse setMessage(String message) {
+    public void setMessage(String message) {
         this.message = message;
-        return this;
     }
 }

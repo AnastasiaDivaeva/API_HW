@@ -22,11 +22,12 @@ public class TagDTO {
         this.name = name;
     }
 
-    public static TagDTO createTag(int id, String name) {
-        TagDTO tagDTO = new TagDTO();
-        tagDTO.setId(id);
-        tagDTO.setName(name);
-        return tagDTO;
+    public TagDTO(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public TagDTO() {
     }
 
     @Override
@@ -35,10 +36,5 @@ public class TagDTO {
         if (o == null || getClass() != o.getClass()) return false;
         TagDTO tagDTO = (TagDTO) o;
         return id == tagDTO.id && Objects.equals(name, tagDTO.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
     }
 }

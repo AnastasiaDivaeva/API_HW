@@ -1,5 +1,6 @@
 package divaeva.hw.api.store;
 
+import divaeva.hw.api.TestUrls;
 import dto.StoreDTO;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -7,7 +8,7 @@ import org.testng.annotations.Test;
 import rest.client.RestClient;
 
 public class DeleteStoreTest extends StoreTestBase {
-    private RestClient<StoreDTO> restClient = new RestClient<>(BASE_SERVER_URL_STORE);
+    private final RestClient restClient = new RestClient(TestUrls.BASE_SERVER_URL_STORE.getUrl());
 
     @Test
     public void verifyStoreCanBeDelete() {
@@ -20,7 +21,7 @@ public class DeleteStoreTest extends StoreTestBase {
         Response responseDelete = restClient.deleteEntity(orderId);
         Assert.assertEquals(responseDelete.getStatusCode(), 200);
 
-        Response response1 = restClient.getEntity(orderId);
+        Response response1 = restClient.getEntities(orderId);
         Assert.assertEquals(response1.getStatusCode(), 404);
     }
 }

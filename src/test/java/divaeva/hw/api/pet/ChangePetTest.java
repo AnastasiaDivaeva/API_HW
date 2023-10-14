@@ -1,5 +1,6 @@
 package divaeva.hw.api.pet;
 
+import divaeva.hw.api.TestUrls;
 import dto.CategoryDTO;
 import dto.PetDTO;
 import dto.TagDTO;
@@ -10,11 +11,10 @@ import rest.client.RestClient;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 public class ChangePetTest extends PetTestBase {
-    private RestClient<PetDTO> restClient = new RestClient<>(BASE_SERVER_URL_PET);
+    private final RestClient restClient = new RestClient(TestUrls.BASE_SERVER_URL_PET.getUrl());
 
     @Test
     public void verifyPetCanBeUpdate() {
@@ -35,13 +35,13 @@ public class ChangePetTest extends PetTestBase {
         String updatePhotoUrl = "https://loremflickr.com/320/278";
         String updatePhotoSecond = "https://loremflickr.com/320/279";
 
-        CategoryDTO updateCategoryDTO = CategoryDTO.createCategory(updateCategoryId, updateCategoryName);
-        TagDTO updateTagsDTO = TagDTO.createTag(updateTagId, updateTagName);
+        CategoryDTO updateCategoryDTO = new CategoryDTO(updateCategoryId, updateCategoryName);
+        TagDTO updateTagsDTO = new TagDTO(updateTagId, updateTagName);
 
-        Set<TagDTO> updateTags = new HashSet<>(Collections.singletonList(updateTagsDTO));
-        Set<String> updatePhotoUrls = new HashSet<>(Arrays.asList(updatePhotoUrl, updatePhotoSecond));
+        List<TagDTO> updateTags = Collections.singletonList(updateTagsDTO);
+        List<String> updatePhotoUrls = Arrays.asList(updatePhotoUrl, updatePhotoSecond);
 
-        PetDTO updatedPetEntity = PetDTO.createPet(petId, updatePetName, updateStatus, updateTags, updatePhotoUrls, updateCategoryDTO);
+        PetDTO updatedPetEntity = new PetDTO(petId, updateCategoryDTO, updatePetName, updatePhotoUrls, updateTags, updateStatus);
 
         Response updatedPetResponse = restClient.updateEntity(updatedPetEntity);
         PetDTO updatedPet = updatedPetResponse.as(PetDTO.class);
@@ -49,7 +49,7 @@ public class ChangePetTest extends PetTestBase {
         Assert.assertEquals(updatedPet.getId(), petId);
         Assert.assertEquals(updatedPet.getName(), updatePetName);
         Assert.assertEquals(updatedPet.getCategory(), updateCategoryDTO);
-        Assert.assertEqualsDeep(updatedPet.getTags(), updateTags, null);
-        Assert.assertEqualsDeep(updatedPet.getPhotoUrls(), updatePhotoUrls, null);
+        Assert.assertEquals(updatedPet.getTags(), updateTags);
+        Assert.assertEquals(updatedPet.getPhotoUrls(), updatePhotoUrls);
     }
 }
